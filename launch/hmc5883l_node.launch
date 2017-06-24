@@ -1,0 +1,8 @@
+<launch>
+	<rosparam file="$(find hmc5883l)/config/hmc5883l_config.yaml" command="load"/>
+
+	<node name="hmc5883l_node" pkg="hmc5883l" 		
+			type="hmc5883l_node.py" output="screen">
+
+	</node>
+</launch>

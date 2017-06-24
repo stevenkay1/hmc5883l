@@ -1,0 +1,10 @@
+# hmc5883l Magnetometer Parameters
+
+hmc5883l_node:
+   # 0x1E (30) standard address
+   device_addr : 30
+   sample_rate : 5
+   i2c_port : 1
+   gauss : 4.7
+   dec1 : -2
+   dec2 : 5

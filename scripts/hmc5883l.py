@@ -1,15 +1,17 @@
 #!/usr/bin/env python
-# vim: set fileencoding=UTF-8 :
+
 
 # HMC5888L Magnetometer (Digital Compass) wrapper class
 # Based on https://bitbucket.org/thinkbowl/i2clibraries/src/14683feb0f96,
-# but uses smbus rather than quick2wire and sets some different init
-# params.
+# Forked from https://github.com/rm-hull/hmc5883l and
+# Modifed by Steven Kay, https://github.com/stevenkay1/hmc5883l.git
+
 
 import smbus
 import math
 import time
 import sys
+
 
 class hmc5883l:
 
@@ -24,7 +26,7 @@ class hmc5883l:
         8.10: [7, 4.35],
     }
 
-    def __init__(self, port=1, address=0x1E, gauss=1.3, declination=(0,0)):
+    def __init__(self, port, address, gauss, declination):
         self.bus = smbus.SMBus(port)
         self.address = address
 
@@ -90,11 +92,11 @@ class hmc5883l:
                "Declination: " + self.degrees(self.declination()) + "\n" \
                "Heading: " + self.degrees(self.heading()) + "\n"
 
-if __name__ == "__main__":
-    # http://magnetic-declination.com/Great%20Britain%20(UK)/Harrogate#
-    compass = hmc5883l(gauss = 4.7, declination = (-2,5))
-    while True:
-        sys.stdout.write("\rHeading: " + str(compass.degrees(compass.heading())) + "     ")
-        sys.stdout.flush()
-        time.sleep(0.5)
+#~ if __name__ == "__main__":
+    #~ # http://magnetic-declination.com/Great%20Britain%20(UK)/Harrogate#
+    #~ compass = hmc5883l(gauss = 4.7, declination = (-2,5))
+    #~ while True:
+        #~ sys.stdout.write("\rHeading: " + str(compass.degrees(compass.heading())) + "     ")
+        #~ sys.stdout.flush()
+        #~ time.sleep(0.5)
 
